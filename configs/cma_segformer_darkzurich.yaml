@@ -1,0 +1,186 @@
+data:
+  class_path: data_modules.CombinedDataModule
+  init_args:
+    batch_size: 1
+    num_workers: 4
+    load_config:
+      train:
+        DarkZurich:
+          load_pseudo_labels: True
+          pseudo_label_dir: pseudo_labels_train_DarkZurich_cma_segformer
+          load_keys:
+            - image
+            - semantic
+            - image_ref
+          transforms:
+            - class_path: data_modules.transforms.ToTensor
+            - class_path: data_modules.transforms.RandomCrop
+              init_args:
+                size: 
+                  - 1080
+                  - 1080
+                cat_max_ratio: 0.75
+            - class_path: data_modules.transforms.RandomHorizontalFlip
+            - class_path: data_modules.transforms.ConvertImageDtype
+            - class_path: data_modules.transforms.Normalize
+      val:
+        DarkZurich:
+          load_keys:
+            - image
+            - semantic
+          transforms:
+            - class_path: data_modules.transforms.ToTensor
+            - class_path: data_modules.transforms.ConvertImageDtype
+            - class_path: data_modules.transforms.Normalize
+      test:
+        DarkZurich:
+          load_keys:
+            - image
+            - semantic
+          transforms:
+            - class_path: data_modules.transforms.ToTensor
+            - class_path: data_modules.transforms.ConvertImageDtype
+            - class_path: data_modules.transforms.Normalize
+        # ACG:
+        #   conditions:
+        #     - night
+        #   load_keys:
+        #     - image
+        #     - semantic
+        #   transforms:
+        #     - class_path: data_modules.transforms.ToTensor
+        #     - class_path: data_modules.transforms.ConvertImageDtype
+        #     - class_path: data_modules.transforms.Normalize
+      predict:
+        DarkZurich:
+          predict_on: val
+          load_keys:
+            - image
+          transforms:
+            - class_path: data_modules.transforms.ToTensor
+            - class_path: data_modules.transforms.ConvertImageDtype
+            - class_path: data_modules.transforms.Normalize
+model:
+  class_path: models.CMAModel
+  init_args:
+    entropy_loss_weight: 0.01
+    contrastive_loss_weight: 1.0
+    freeze_decoder: True
+    projection_head_lr_factor: 10.0
+    ema_momentum: 0.9999
+    backbone:
+      class_path: models.backbones.MixVisionTransformer
+      init_args:
+        model_type: mit_b5
+        pretrained: cityscapes
+    head:
+      class_path: models.heads.SegFormerHead
+      init_args:
+        in_channels:
+          - 64
+          - 128
+          - 320
+          - 512
+        in_index:
+          - 0
+          - 1
+          - 2
+          - 3
+        channels: 768
+        num_classes: 19
+        input_transform: multiple_select
+        pretrained: cityscapes
+    contrastive_head:
+      class_path: models.heads.ProjectionHead
+      init_args:
+        in_channels:
+          - 64
+          - 128
+          - 320
+          - 512
+        in_index:
+          - 0
+          - 1
+          - 2
+          - 3
+        channels: 128
+        input_transform: resize_concat
+    alignment_backbone:
+      class_path: models.backbones.VGG
+      init_args:
+        model_type: vgg16
+        pretrained: imagenet
+        out_indices:
+          - 2
+          - 3
+          - 4
+    alignment_head:
+      class_path: models.heads.UAWarpCHead
+      init_args:
+        in_index:
+          - 0
+          - 1
+        input_transform: multiple_select
+        estimate_uncertainty: True
+        pretrained: megadepth
+    self_training_loss:
+      class_path: torch.nn.CrossEntropyLoss
+      init_args:
+        ignore_index: 255
+    entropy_loss:
+      class_path: models.losses.NormalizedEntropyLoss
+    contrastive_loss:
+      class_path: models.losses.CDCLoss
+      init_args:
+        feat_dim: 128
+        temperature: 0.03
+        num_grid: 7
+        queue_len: 65536
+        warm_up_steps: 2500
+        confidence_threshold: 0.2
+    metrics:
+      val:
+        DarkZurich:
+          - class_path: helpers.metrics.IoU
+            init_args:
+              num_classes: 19
+              ignore_index: 255
+              average: macro
+      test:
+        DarkZurich:
+          - class_path: helpers.metrics.IoU
+            init_args:
+              num_classes: 19
+              ignore_index: 255
+              average: macro
+        # ACG:
+        #   - class_path: helpers.metrics.IoU
+        #     init_args:
+        #       num_classes: 19
+        #       ignore_index: 255
+        #       average: macro
+optimizer:
+  class_path: torch.optim.AdamW
+  init_args:
+    lr: 0.00001
+    weight_decay: 0.01
+lr_scheduler:
+  class_path: helpers.lr_scheduler.LinearWarmupLinearLR
+  init_args:
+    warmup_iters: 1500
+    warmup_ratio: 0.000001
+    max_steps: 10000
+trainer:
+  max_steps: 10000
+  val_check_interval: 1000
+  check_val_every_n_epoch: null
+  sync_batchnorm: True
+  logger:
+    class_path: pytorch_lightning.loggers.CSVLogger
+    init_args:
+      save_dir: logs/cma_segformer_darkzurich
+  callbacks:
+    - class_path: pytorch_lightning.callbacks.LearningRateMonitor
+    - class_path: pytorch_lightning.callbacks.ModelCheckpoint
+      init_args:
+        every_n_train_steps: 1000
