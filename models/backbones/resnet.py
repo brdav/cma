@@ -17,7 +17,7 @@ model_urls = {
         "resnet101_v1c": "https://download.openmmlab.com/pretrain/third_party/resnet101_v1c-e67eebb6.pth",
     },
     "cityscapes": {
-        "resnet101_v1c": "https://data.vision.ee.ethz.ch/brdavid/coma/deeplabv2_cityscapes.pth"
+        "resnet101_v1c": "https://data.vision.ee.ethz.ch/brdavid/cma/deeplabv2_cityscapes.pth"
     }
 }
 
