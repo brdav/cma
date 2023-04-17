@@ -8,7 +8,7 @@
 
 </div>
 
-Official code for the paper [Contrastive Model Adaptation for Cross-Condition Robustness in Semantic Segmentation](TODO). The code is organized using [PyTorch Lightning](https://github.com/Lightning-AI/lightning). 
+Official code for the paper [Contrastive Model Adaptation for Cross-Condition Robustness in Semantic Segmentation](https://arxiv.org/abs/2303.05194). The code is organized using [PyTorch Lightning](https://github.com/Lightning-AI/lightning). 
 
 <img src="./docs/method.png" width="900"/>
 
