@@ -5,10 +5,11 @@
 # Contrastive Model Adaptation for Cross-Condition Robustness in Semantic Segmentation
 
 [![Paper](http://img.shields.io/badge/paper-arxiv.2303.05194-B31B1B.svg)](https://arxiv.org/abs/2303.05194)
+[![Conference](http://img.shields.io/badge/ICCV-2023-4b44ce.svg)](https://iccv2023.thecvf.com/) 
 
 </div>
 
-Official code for the paper [Contrastive Model Adaptation for Cross-Condition Robustness in Semantic Segmentation](https://arxiv.org/abs/2303.05194). The code is organized using [PyTorch Lightning](https://github.com/Lightning-AI/lightning). 
+Official code for the ICCV 2023 paper [Contrastive Model Adaptation for Cross-Condition Robustness in Semantic Segmentation](https://arxiv.org/abs/2303.05194). The code is organized using [PyTorch Lightning](https://github.com/Lightning-AI/lightning). 
 
 <img src="./docs/method.png" width="900"/>
 
@@ -27,7 +28,7 @@ pip install -r requirements.txt
 
 ### Optional
 
-Local correlation is implemented through [this custom CUDA extension](https://github.com/ClementPinard/Pytorch-Correlation-extension). By default the extension is built just in time using Ninja. In case of problems, the extension can be alternatively pre-installed in the environment (see also the README of the linked repo):
+Local correlation is implemented through [this custom CUDA extension](https://github.com/ClementPinard/Pytorch-Correlation-extension). By default, the extension is built just in time using Ninja. In case of problems, the extension can be alternatively pre-installed in the environment (see also the README of the linked repo):
 ```bash
 pip install spatial-correlation-sampler
 ```
@@ -185,10 +186,10 @@ python -m tools.run test --config configs/cma_segformer_acdc.yaml --trainer.acce
 
 If you find this code useful in your research, please consider citing the paper:
 ```bibtex
-@article{bruggemann2023contrastive,
+@inproceedings{bruggemann2023contrastive,
   title={Contrastive Model Adaptation for Cross-Condition Robustness in Semantic Segmentation},
   author={Bruggemann, David and Sakaridis, Christos and Broedermann, Tim and Van Gool, Luc},
-  journal={arXiv preprint arXiv:2303.05194},
+  booktitle={ICCV},
   year={2023}
 }
 ```
