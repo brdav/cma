@@ -14,8 +14,8 @@ from .modules import ConvBNReLU
 
 model_urls = {
     "cityscapes": {
-        # same weights as provided by official SegFormer repo: https://github.com/NVlabs/SegFormer
-        "mit_b5": "https://data.vision.ee.ethz.ch/brdavid/refign/segformer.b5.1024x1024.city.160k.pth",
+        # SegFormer weights provided by official SegFormer repo: https://github.com/NVlabs/SegFormer
+        "mit_b5": "./pretrained_models/segformer.b5.1024x1024.city.160k.pth",
     }
 }
 

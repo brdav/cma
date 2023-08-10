@@ -11,7 +11,7 @@ from PIL import Image
 class ACG(torch.utils.data.Dataset):
     """ACG benchmark from the paper:
 
-        Contrastive Model Adaptation for Cross-Condition Robustness in Semantic Segmentation
+        Bruggemann et al., Contrastive Model Adaptation for Cross-Condition Robustness in Semantic Segmentation, ICCV 2023
 
     """
 

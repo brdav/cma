@@ -8,7 +8,7 @@ from .base import BaseHead
 
 model_urls = {
     # DeepLabv2 trained on Cityscapes
-    "cityscapes": "https://data.vision.ee.ethz.ch/brdavid/coma/deeplabv2_cityscapes.pth"
+    "cityscapes": "https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/deeplabv2_cityscapes.pth"
 }
 
 

@@ -112,18 +112,23 @@ Before running the code, download and extract the respective datasets to the dir
 </details>
 
 
+### Download the Pretrained Weights
+
+The Cityscapes-pretrained SegFormer weights (`segformer.b5.1024x1024.city.160k.pth`) are required for CMA. Download them from the [SegFormer repository](https://github.com/NVlabs/SegFormer) and save them to `./pretrained_models/`.
+
+
 ### Model Checkpoints and Results
 
 We provide the following model checkpoints and validation set predictions:
 
 | Method         | Architecture           | Dataset       | Test mIoU    | Config      |  Checkpoint    |   Predictions  |
 |---------------|----------------|-----------------|-----------------|------------|----------------|------------|
-| CMA | SegFormer | ACDC | 69.1 | [config](https://github.com/brdav/cma/blob/main/configs/cma_segformer_acdc.yaml) | [model](https://data.vision.ee.ethz.ch/brdavid/cma/cma_segformer_acdc.ckpt) | [ACDC val](https://data.vision.ee.ethz.ch/brdavid/cma/colored_preds_val_ACDC_cma_segformer.zip) 
-| CMA | DeepLabv2 | ACDC | 50.4 | [config](https://github.com/brdav/cma/blob/main/configs/cma_deeplabv2_acdc.yaml) | [model](https://data.vision.ee.ethz.ch/brdavid/cma/cma_deeplabv2_acdc.ckpt) | [ACDC val](https://data.vision.ee.ethz.ch/brdavid/cma/colored_preds_val_ACDC_cma_deeplabv2.zip) 
+| CMA | SegFormer | ACDC | 69.1 | [config](https://github.com/brdav/cma/blob/main/configs/cma_segformer_acdc.yaml) | [model](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/cma_segformer_acdc.ckpt) | [ACDC val](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/colored_preds_val_ACDC_cma_segformer.zip) 
+| CMA | DeepLabv2 | ACDC | 50.4 | [config](https://github.com/brdav/cma/blob/main/configs/cma_deeplabv2_acdc.yaml) | [model](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/cma_deeplabv2_acdc.ckpt) | [ACDC val](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/colored_preds_val_ACDC_cma_deeplabv2.zip) 
 |||||||
-| CMA | SegFormer | Dark Zurich | 53.6 | [config](https://github.com/brdav/cma/blob/main/configs/cma_segformer_darkzurich.yaml) | [model](https://data.vision.ee.ethz.ch/brdavid/cma/cma_segformer_darkzurich.ckpt) | [Dark Zurich val](https://data.vision.ee.ethz.ch/brdavid/cma/colored_preds_val_DarkZurich_cma_segformer.zip) 
+| CMA | SegFormer | Dark Zurich | 53.6 | [config](https://github.com/brdav/cma/blob/main/configs/cma_segformer_darkzurich.yaml) | [model](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/cma_segformer_darkzurich.ckpt) | [Dark Zurich val](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/colored_preds_val_DarkZurich_cma_segformer.zip) 
 |||||||
-| CMA | SegFormer | RobotCar | 54.3 | [config](https://github.com/brdav/cma/blob/main/configs/cma_segformer_robotcar.yaml) | [model](https://data.vision.ee.ethz.ch/brdavid/cma/cma_segformer_robotcar.ckpt) | [RobotCar val](https://data.vision.ee.ethz.ch/brdavid/cma/colored_preds_val_RobotCar_cma_segformer.zip) 
+| CMA | SegFormer | RobotCar | 54.3 | [config](https://github.com/brdav/cma/blob/main/configs/cma_segformer_robotcar.yaml) | [model](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/cma_segformer_robotcar.ckpt) | [RobotCar val](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/colored_preds_val_RobotCar_cma_segformer.zip) 
 
 
 ### Create Pseudo-Labels (Optional)
@@ -159,7 +164,7 @@ python -m tools.run predict --config configs/cma_segformer_acdc.yaml --trainer.a
 
 ## ACG Benchmark
 
-To evaluate a model on the ACG benchmark, first download the filename lists and instructions here: [ACG Benchmark](https://data.vision.ee.ethz.ch/brdavid/cma/ACG.zip)
+To evaluate a model on the ACG benchmark, first download the filename lists and instructions here: [ACG Benchmark](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/ACG.zip)
 
 See the README file of the downloaded ACG bundle for details on how to retrieve and arrange the necessary datasets. In summary, the file structure should look as follows:
 
@@ -197,7 +202,3 @@ If you find this code useful in your research, please consider citing the paper:
 ## License
 
 This repository is released under the MIT license. However, care should be taken to adopt appropriate licensing for third-party code in this repository. Third-party code is marked accordingly.
-
-## Contact
-
-For questions about the code or paper, feel free to contact me ([send email](mailto:brdavid@vision.ee.ethz.ch)).

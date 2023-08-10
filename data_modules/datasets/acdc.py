@@ -8,8 +8,8 @@ import torch
 from PIL import Image
 
 URLS = {
-    "pseudo_labels_train_ACDC_cma_segformer": "https://data.vision.ee.ethz.ch/brdavid/cma/pseudo_labels_train_ACDC_cma_segformer.zip",
-    "pseudo_labels_train_ACDC_cma_deeplabv2": "https://data.vision.ee.ethz.ch/brdavid/cma/pseudo_labels_train_ACDC_cma_deeplabv2.zip",
+    "pseudo_labels_train_ACDC_cma_segformer": "https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/pseudo_labels_train_ACDC_cma_segformer.zip",
+    "pseudo_labels_train_ACDC_cma_deeplabv2": "https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626144/pseudo_labels_train_ACDC_cma_deeplabv2.zip",
 }
 
 

@@ -12,7 +12,7 @@ from .modules import ConvBNReLU
 
 model_urls = {
     # checkpoint from Refign: https://github.com/brdav/refign
-    "megadepth": "https://data.vision.ee.ethz.ch/brdavid/refign/uawarpc_megadepth.ckpt"
+    "megadepth": "https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/626140/uawarpc_megadepth.ckpt"
 }
 
 
