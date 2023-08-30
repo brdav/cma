@@ -6,7 +6,7 @@ if __name__ == '__main__':
         name='cma',
         version='1.0',
         description='',
-        author='brdavid',
+        author='brdav',
         author_email='',
         url='',
         install_requires=['pytorch-lightning'],
